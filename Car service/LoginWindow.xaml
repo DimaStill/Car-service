@@ -5,14 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Car_service"
         mc:Ignorable="d"
-        Title="Авторизація" Height="210" Width="250" Background="#FF222831"
-        ResizeMode="NoResize">
-
+        Title="Авторизація"
+        Style="{DynamicResource LoginWindowStyle}">
     <Window.Resources>
-        
+        <ResourceDictionary Source="LoginStyle.xaml" />
     </Window.Resources>
-    
-    <Grid Background="#FF222831">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
@@ -22,38 +20,16 @@
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
         
-        <Label Content="Код співробітника"
-               Foreground="#FFFFFBE0"
-               Grid.Column="0"
-               Grid.Row="0"
-               HorizontalAlignment="Right"
-               Margin="5 10" 
-               VerticalAlignment="Bottom"/>
+        <Label Style="{DynamicResource LabelStyle}"/>
 
         <TextBox Name="TextBoxID"
-                 Background="#FF393E46"
-                 Grid.Column="1"
-                 Grid.Row="0"
-                 Height="25"
-                 HorizontalAlignment="Left"
-                 Margin="5 10"
-                 VerticalAlignment="Bottom"
-                 Width="100" Foreground="#FFFFFBE0"
+                 Style="{DynamicResource TextBoxStyle}" 
                  PreviewKeyDown="LoginPreviewKeyDown"/>
 
-        
 
-        <Button Background="#FFCBB52E"
-                Content="Вхід"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Grid.Row="3"
-                Height="30"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Margin="10"
-                Width="100"
-                Click="OnLoginClick"/>
+        <Button Style="{DynamicResource ButtonStyle}" 
+                Click="OnLoginClick"
+                Template="{StaticResource ButtonTemplate}"/>
 
     </Grid>
 </Window>

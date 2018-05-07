@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Car_service">
+    <Style x:Key="WindowStyle" TargetType="Window">
+        <Setter Property="Background" Value="#FF222831"/>
+        <Setter Property="Height" Value="450" />
+        <Setter Property="Width" Value="800" />
+    </Style> 
+</ResourceDictionary>
