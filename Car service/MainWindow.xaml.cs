@@ -23,5 +23,16 @@ namespace Car_service
         {
             InitializeComponent();
         }
+
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double tabSize = tabSize = Width / 4 - 4; 
+            if (Double.IsNaN(Width))
+                tabSize = 252.25;
+            TabPage1.Width = tabSize;
+            TabPage2.Width = tabSize;
+            TabPage3.Width = tabSize;
+            TabPage4.Width = tabSize;
+        }
     }
 }

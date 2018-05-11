@@ -5,18 +5,16 @@
         <ResourceDictionary Source="WindowStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="WindowStyle" TargetType="Window" BasedOn="{StaticResource WindowStyle}"/>
+    <Style x:Key="WindowStyle" TargetType="Window" BasedOn="{StaticResource WindowStyle}" />
 
     <ControlTemplate TargetType="TabItem" x:Key="TabItemTemplate">
-        <Grid Background="#FF3E4959" 
-              Width="190" 
-              Height="100">
+        
+        <Grid Background="#FF3E4959"
+              Height="150">
 
-            <Border Name="Border"
-                    BorderThickness="0" 
+            <Border BorderThickness="0" 
                     CornerRadius="0,0,0,0">
-                <ContentPresenter x:Name="ContentSite"
-                                  VerticalAlignment="Center"
+                <ContentPresenter VerticalAlignment="Center"
                                   HorizontalAlignment="Center"
                                   ContentSource="Header"
                                   Margin="0"
@@ -24,6 +22,26 @@
                                   TextBlock.Foreground="White"
                                   TextBlock.FontWeight="Bold"
                                   TextBlock.FontSize="20"/>
+            </Border>
+        </Grid>
+
+    </ControlTemplate>
+
+    
+    <ControlTemplate TargetType="TabItem" x:Key="PhotoTabItemTemplate">
+
+        <Grid Background="#FF3E4959"
+              Height="150">
+
+            <Border BorderThickness="0" 
+                    CornerRadius="0,0,0,0">
+                <Ellipse Height="100" 
+                         Width="100" 
+                         HorizontalAlignment="Right">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/Karaev. D.jpg"/>
+                    </Ellipse.Fill>
+                </Ellipse>
             </Border>
         </Grid>
 
@@ -51,4 +69,9 @@
         </Grid>
 
     </ControlTemplate>
+
+    <ControlTemplate TargetType="{x:Type Image}" x:Key="ImageTemplate">
+        
+    </ControlTemplate>
+    
 </ResourceDictionary>
