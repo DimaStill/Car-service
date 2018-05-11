@@ -48,14 +48,14 @@ namespace Car_service
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(sqlCommand, connection);
-                    //adapter = new SqlDataAdapter(command);
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    if (TextBoxID.Text == String.Empty)
-                        throw new Exception("Введіть свій унікальний код");
-                    else if (!reader.HasRows)
-                        throw new Exception("Робітник з таким кодом не знайдено");
-                    reader.Close();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        reader.Read();
+                        if (TextBoxID.Text == String.Empty)
+                            throw new Exception("Введіть свій унікальний код");
+                        else if (!reader.HasRows)
+                            throw new Exception("Робітник з таким кодом не знайдено");
+                    }
                 }
                 new MainWindow().Show();
                 Close();
