@@ -28,8 +28,7 @@
 
 
         <Button Style="{DynamicResource ButtonStyle}" 
-                Click="OnLoginClick"
-                Template="{StaticResource ButtonTemplate}"/>
+                Click="OnLoginClick" />
 
     </Grid>
 </Window>

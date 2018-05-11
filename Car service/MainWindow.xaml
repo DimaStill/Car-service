@@ -1,16 +1,22 @@
 ﻿<Window x:Class="Car_service.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Car_service"
         mc:Ignorable="d"
-        Title="MainWindow" Style="{DynamicResource WindowStyle}">
+        Title="MainWindow"
+        Style="{DynamicResource WindowStyle}">
     <Window.Resources>
-        <ResourceDictionary Source="WindowStyle.xaml" />
+        <ResourceDictionary Source="MainWindowStyle.xaml" />
     </Window.Resources>
-    
+
     <Grid>
-        
+        <TabControl Background="#EF222831" Template="{StaticResource TabControlItem}">
+            <TabItem Header="TabPage1" Template="{StaticResource TabItemTemplate}"/>
+            <TabItem Header="TabPage2" Template="{StaticResource TabItemTemplate}"/>
+            <TabItem Header="TabPage2" Template="{StaticResource TabItemTemplate}"/>
+            <TabItem Header="TabPage2" Template="{StaticResource TabItemTemplate}"/>
+        </TabControl>
+
     </Grid>
 </Window>

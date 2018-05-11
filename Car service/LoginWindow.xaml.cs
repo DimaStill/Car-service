@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,13 @@ namespace Car_service
     /// </summary>
     public partial class LoginWindow : Window
     {
+        string connectionString;
+
         public LoginWindow()
         {
             InitializeComponent();
+
+            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
         private void LoginPreviewKeyDown(object sender, KeyEventArgs e)
@@ -33,13 +40,30 @@ namespace Car_service
 
         private void OnLoginClick(object sender, RoutedEventArgs e)
         {
-            if (TextBoxID.Text != String.Empty)
+            string sqlCommand = $"SELECT [ID] FROM [Працівники] WHERE [ID] = {TextBoxID.Text}";
+            SqlConnection connection = null;
+            try
             {
+                using (connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+                    //adapter = new SqlDataAdapter(command);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    if (TextBoxID.Text == String.Empty)
+                        throw new Exception("Введіть свій унікальний код");
+                    else if (!reader.HasRows)
+                        throw new Exception("Робітник з таким кодом не знайдено");
+                    reader.Close();
+                }
                 new MainWindow().Show();
                 Close();
             }
-            else
-                MessageBox.Show("Введіть свій код", "Помилка!");
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Помилка!");
+            }
         }
     }
 }
