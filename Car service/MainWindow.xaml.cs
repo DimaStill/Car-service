@@ -24,6 +24,12 @@ namespace Car_service
             InitializeComponent();
         }
 
+        public MainWindow(User currentUser)
+        {
+            InitializeComponent();
+            DataContext = currentUser;
+        }
+
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             double tabSize = tabSize = Width / 4 - 4; 

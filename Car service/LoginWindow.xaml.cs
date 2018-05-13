@@ -40,10 +40,13 @@ namespace Car_service
 
         private void OnLoginClick(object sender, RoutedEventArgs e)
         {
-            string sqlCommand = $"SELECT [ID] FROM [Працівники] WHERE [ID] = {TextBoxID.Text}";
+            string sqlCommand = $"SELECT * FROM [Працівники] WHERE [ID] = {TextBoxID.Text}";
             SqlConnection connection = null;
             try
             {
+                if (TextBoxID.Text == String.Empty)
+                    throw new Exception("Введіть свій унікальний код");
+                User user = new User();
                 using (connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -51,13 +54,12 @@ namespace Car_service
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         reader.Read();
-                        if (TextBoxID.Text == String.Empty)
-                            throw new Exception("Введіть свій унікальний код");
-                        else if (!reader.HasRows)
+                        if (!reader.HasRows)
                             throw new Exception("Робітник з таким кодом не знайдено");
+                        user.ConvertToUser(reader);
                     }
                 }
-                new MainWindow().Show();
+                new MainWindow(user).Show();
                 Close();
             }
             catch (Exception exception)

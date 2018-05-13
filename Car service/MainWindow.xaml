@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Car_service"
         mc:Ignorable="d"
         Title="MainWindow"
         Style="{DynamicResource WindowStyle}"
@@ -16,7 +17,7 @@
             <TabItem  Name="TabPage1" Header="TabPage1" Template="{StaticResource TabItemTemplate}"/>
             <TabItem Name="TabPage2" Header="TabPage2" Template="{StaticResource TabItemTemplate}"/>
             <TabItem Name="TabPage3" Header="TabPage3" Template="{StaticResource TabItemTemplate}"/>
-            <TabItem Name="TabPage4" Header="TabPage4" Template="{StaticResource PhotoTabItemTemplate}">
+            <TabItem Name="TabPage4" Header="{Binding Path=Surname}" Template="{StaticResource PhotoTabItemTemplate}">
                 
             </TabItem>
         </TabControl>

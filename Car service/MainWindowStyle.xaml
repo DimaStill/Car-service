@@ -11,7 +11,7 @@
         
         <Grid Background="#FF3E4959"
               Height="150">
-
+              
             <Border BorderThickness="0" 
                     CornerRadius="0,0,0,0">
                 <ContentPresenter VerticalAlignment="Center"
@@ -35,13 +35,21 @@
 
             <Border BorderThickness="0" 
                     CornerRadius="0,0,0,0">
-                <Ellipse Height="100" 
-                         Width="100" 
-                         HorizontalAlignment="Right">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/Karaev. D.jpg"/>
-                    </Ellipse.Fill>
-                </Ellipse>
+                <Grid>
+                    <ContentPresenter VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      ContentSource="Header"
+                                      TextBlock.Foreground="White"
+                                      TextBlock.FontWeight="Bold"
+                                      TextBlock.FontSize="20"/>
+                    <Ellipse Height="100" 
+                             Width="100" 
+                             HorizontalAlignment="Right">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/Karaev. D.jpg"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
             </Border>
         </Grid>
 
