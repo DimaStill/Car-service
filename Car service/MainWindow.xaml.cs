@@ -32,13 +32,21 @@ namespace Car_service
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            double tabSize = tabSize = Width / 4 - 4; 
-            if (Double.IsNaN(Width))
-                tabSize = 252.25;
-            TabPage1.Width = tabSize;
-            TabPage2.Width = tabSize;
-            TabPage3.Width = tabSize;
-            TabPage4.Width = tabSize;
+            if (e.NewSize.Height < 525 || e.NewSize.Width < 1025)
+            {
+                Width = e.PreviousSize.Width;
+                Height = e.PreviousSize.Height;
+            }
+            else
+            {
+                double tabSize = tabSize = Width / 4 - 4;
+                if (Double.IsNaN(Width))
+                    tabSize = 252.25;
+                TabPage1.Width = tabSize;
+                TabPage2.Width = tabSize;
+                TabPage3.Width = tabSize;
+                TabPage4.Width = tabSize;
+            }
         }
     }
 }

@@ -14,11 +14,37 @@
 
     <DockPanel>
         <TabControl Template="{StaticResource TabControlItem}">
-            <TabItem  Name="TabPage1" Header="TabPage1" Template="{StaticResource TabItemTemplate}"/>
-            <TabItem Name="TabPage2" Header="TabPage2" Template="{StaticResource TabItemTemplate}"/>
-            <TabItem Name="TabPage3" Header="TabPage3" Template="{StaticResource TabItemTemplate}"/>
-            <TabItem Name="TabPage4" Header="{Binding Path=Surname}" Template="{StaticResource PhotoTabItemTemplate}">
-                
+            <TabItem Name="TabPage1" 
+                     Header="TabPage1" 
+                     Template="{StaticResource TabItemTemplate}"/>
+            <TabItem Name="TabPage2" 
+                     Header="TabPage2" 
+                     Template="{StaticResource TabItemTemplate}"/>
+            <TabItem Name="TabPage3" 
+                     Header="TabPage3" 
+                     Template="{StaticResource TabItemTemplate}"/>
+            <TabItem Name="TabPage4"  
+                     Template="{StaticResource PhotoTabItemTemplate}">
+                <TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ContentPresenter Grid.Row="0" 
+                                          Content="{Binding Path=Surname}" 
+                                          Style="{StaticResource ContentPresenterStyle}"/>
+                        <ContentPresenter Grid.Row="1" 
+                                          Content="{Binding Path=Name}" 
+                                          Style="{StaticResource ContentPresenterStyle}"/>
+                        <ContentPresenter Grid.Row="2" 
+                                          Content="{Binding Path=Position}" 
+                                          Style="{StaticResource ContentPresenterStyle}" 
+                                          TextBlock.FontSize="15" 
+                                          Margin="0 2"/>
+                    </Grid>
+                </TabItem.Header>
             </TabItem>
         </TabControl>
 

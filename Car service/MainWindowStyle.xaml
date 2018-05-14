@@ -7,6 +7,12 @@
 
     <Style x:Key="WindowStyle" TargetType="Window" BasedOn="{StaticResource WindowStyle}" />
 
+    <Style x:Key="ContentPresenterStyle" TargetType="ContentPresenter">
+        <Setter Property="TextBlock.Foreground" Value="White"/>
+        <Setter Property="TextBlock.FontWeight" Value="Bold" />
+        <Setter Property="TextBlock.FontSize" Value="20" />
+    </Style>
+
     <ControlTemplate TargetType="TabItem" x:Key="TabItemTemplate">
         
         <Grid Background="#FF3E4959"
@@ -36,12 +42,14 @@
             <Border BorderThickness="0" 
                     CornerRadius="0,0,0,0">
                 <Grid>
-                    <ContentPresenter VerticalAlignment="Center"
+                    <ContentPresenter Name="FirstNameContent"
+                                      VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
                                       ContentSource="Header"
                                       TextBlock.Foreground="White"
                                       TextBlock.FontWeight="Bold"
-                                      TextBlock.FontSize="20"/>
+                                      TextBlock.FontSize="20"
+                                      Margin="40"/>
                     <Ellipse Height="100" 
                              Width="100" 
                              HorizontalAlignment="Right">
