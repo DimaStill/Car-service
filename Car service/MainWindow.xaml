@@ -7,16 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Style="{DynamicResource WindowStyle}"
-        SizeChanged="WindowSizeChanged">
+        SizeChanged="WindowSizeChanged"
+        Loaded="WindowLoaded">
     <Window.Resources>
         <ResourceDictionary Source="MainWindowStyle.xaml" />
     </Window.Resources>
 
-    <DockPanel>
+    <Grid>
+        
         <TabControl Template="{StaticResource TabControlItem}">
             <TabItem Name="TabPage1" 
-                     Header="TabPage1" 
-                     Template="{StaticResource TabItemTemplate}"/>
+                     Header="Замовлення" 
+                     Template="{StaticResource TabItemTemplate}">
+                <DataGrid AutoGenerateColumns="True" x:Name="ordersGrid">
+                    
+                </DataGrid>
+            </TabItem>
             <TabItem Name="TabPage2" 
                      Header="TabPage2" 
                      Template="{StaticResource TabItemTemplate}"/>
@@ -48,5 +54,5 @@
             </TabItem>
         </TabControl>
 
-    </DockPanel>
+    </Grid>
 </Window>

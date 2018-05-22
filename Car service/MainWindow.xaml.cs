@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,10 @@ namespace Car_service
     /// </summary>
     public partial class MainWindow : Window
     {
+        string connectionString;
+        SqlDataAdapter adapter;
+        DataTable ordersTable;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,6 +35,7 @@ namespace Car_service
         {
             InitializeComponent();
             DataContext = currentUser;
+            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
         private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
@@ -46,6 +54,27 @@ namespace Car_service
                 TabPage2.Width = tabSize;
                 TabPage3.Width = tabSize;
                 TabPage4.Width = tabSize;
+            }
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            string sqlCommand = "SELECT * FROM [Замовлення]";
+            ordersTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    adapter.Fill(ordersTable);
+                    ordersGrid.ItemsSource = ordersTable.DefaultView;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Помилка!");
+                }
             }
         }
     }

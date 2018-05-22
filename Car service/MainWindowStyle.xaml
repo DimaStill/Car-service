@@ -14,20 +14,20 @@
     </Style>
 
     <ControlTemplate TargetType="TabItem" x:Key="TabItemTemplate">
-        
-        <Grid Background="#FF3E4959"
-              Height="150">
-              
+
+        <Grid Background="#FF3E4959">
+
             <Border BorderThickness="0" 
                     CornerRadius="0,0,0,0">
                 <ContentPresenter VerticalAlignment="Center"
                                   HorizontalAlignment="Center"
                                   ContentSource="Header"
-                                  Margin="0"
+                                  Margin="50 0"
                                   RecognizesAccessKey="True"
                                   TextBlock.Foreground="White"
                                   TextBlock.FontWeight="Bold"
-                                  TextBlock.FontSize="20"/>
+                                  TextBlock.FontSize="20"
+                                  />
             </Border>
         </Grid>
 
@@ -37,7 +37,7 @@
     <ControlTemplate TargetType="TabItem" x:Key="PhotoTabItemTemplate">
 
         <Grid Background="#FF3E4959"
-              Height="150">
+              >
 
             <Border BorderThickness="0" 
                     CornerRadius="0,0,0,0">
@@ -66,22 +66,34 @@
 
     <ControlTemplate TargetType="{x:Type TabControl}" x:Key="TabControlItem">
         <Grid KeyboardNavigation.TabNavigation="Local">
-            <TabPanel Name="HeaderPanel"
-                      Panel.ZIndex="1" 
-                      Margin="0" 
-                      IsItemsHost="True"
-                      KeyboardNavigation.TabIndex="1"
-                      Background="#FF222831" />
-            <Border Name="Border"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid
+                  Grid.Row="0"
+                  Background="#FF222831">
+                <Border Name="Border"
                     BorderThickness="1" 
                     CornerRadius="2" 
                     KeyboardNavigation.TabNavigation="Local"
                     KeyboardNavigation.DirectionalNavigation="Contained"
-                    KeyboardNavigation.TabIndex="2" >   
-                <ContentPresenter Name="PART_SelectedContentHost"
-                                  Margin="4"
-                                  ContentSource="SelectedContent" />
-            </Border>
+                    KeyboardNavigation.TabIndex="1" 
+                        Grid.Row="0">
+                    <StackPanel Name="HeaderPanel"
+                                        IsItemsHost="True"
+                                        Orientation="Horizontal">
+                    </StackPanel>
+                </Border>
+            </Grid>
+            
+            <ContentPresenter Name="ContentTabControl"
+                              Grid.Row="1"
+                              Margin="4"
+                              ContentSource="SelectedContent" />
         </Grid>
 
     </ControlTemplate>
