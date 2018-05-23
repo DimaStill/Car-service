@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Car_service"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="СТО"
         Style="{DynamicResource WindowStyle}"
         SizeChanged="WindowSizeChanged"
         Loaded="WindowLoaded">
@@ -19,16 +19,120 @@
             <TabItem Name="TabPage1" 
                      Header="Замовлення" 
                      Template="{StaticResource TabItemTemplate}">
-                <DataGrid AutoGenerateColumns="True" x:Name="ordersGrid">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+                    <ToolBarTray Grid.Row="0">
+                        <ToolBar>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/Update_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button Click="OnAddClick">
+                                <Image Source="pack://application:,,,/Resources/add_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/delete_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/Printer_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Separator />
+                            <TextBox Width="150"
+                                     Foreground="LightGray">Пошук...
+                            </TextBox>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid AutoGenerateColumns="True" 
+                              x:Name="ordersGrid"
+                              Grid.Row="1">
                     
-                </DataGrid>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Name="TabPage2" 
-                     Header="TabPage2" 
-                     Template="{StaticResource TabItemTemplate}"/>
+                     Header="Клієнти" 
+                     Template="{StaticResource TabItemTemplate}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+                    <ToolBarTray Grid.Row="0">
+                        <ToolBar>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/Update_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button Click="OnAddClick">
+                                <Image Source="pack://application:,,,/Resources/add_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/delete_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/Printer_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Separator />
+                            <TextBox Width="150"
+                                     Foreground="LightGray">Пошук...
+                            </TextBox>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid AutoGenerateColumns="True" 
+                              x:Name="clientsGrid"
+                              Grid.Row="1">
+
+                    </DataGrid>
+                </Grid>
+            </TabItem>
             <TabItem Name="TabPage3" 
-                     Header="TabPage3" 
-                     Template="{StaticResource TabItemTemplate}"/>
+                     Header="Запчастини" 
+                     Template="{StaticResource TabItemTemplate}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+                    <ToolBarTray Grid.Row="0">
+                        <ToolBar>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/Update_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button Click="OnAddClick">
+                                <Image Source="pack://application:,,,/Resources/add_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/delete_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/Printer_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Separator />
+                            <TextBox Width="150"
+                                     Foreground="LightGray">Пошук...
+                            </TextBox>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid AutoGenerateColumns="True" 
+                              x:Name="storageGrid"
+                              Grid.Row="1">
+
+                    </DataGrid>
+                </Grid>
+            </TabItem>
             <TabItem Name="TabPage4"  
                      Template="{StaticResource PhotoTabItemTemplate}">
                 <TabItem.Header>

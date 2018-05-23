@@ -77,5 +77,10 @@ namespace Car_service
                 }
             }
         }
+
+        private void OnAddClick(object sender, RoutedEventArgs e)
+        {
+            new AddOrderWindow().Show();
+        }
     }
 }

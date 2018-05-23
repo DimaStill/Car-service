@@ -28,7 +28,8 @@
 
 
         <Button Style="{DynamicResource ButtonStyle}" 
-                Click="OnLoginClick" />
+                Click="OnLoginClick"
+                Content="Вхід"/>
 
     </Grid>
 </Window>

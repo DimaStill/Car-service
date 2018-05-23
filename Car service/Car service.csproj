@@ -56,7 +56,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <Page Include="AddOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddOrderWindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +122,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\physical_Person_Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -121,6 +133,53 @@
     <None Include="Resources\Karaev. D.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\update_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\printer_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delete_Icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\juridical_Person_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\automobile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\automobile-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delivery-truck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delivery-truck-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\motor-sports.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tourist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\transportation-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\time_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\UAH_Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

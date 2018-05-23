@@ -5,5 +5,30 @@
         <Setter Property="Background" Value="#FF222831"/>
         <Setter Property="Height" Value="450" />
         <Setter Property="Width" Value="800" />
-    </Style> 
+    </Style>
+
+    <ControlTemplate TargetType="Button" 
+                     x:Key="ButtonTemplate">
+        <Border CornerRadius="10" 
+                BorderBrush="CadetBlue" 
+                BorderThickness="2"
+                Background="#FFCBB52E" 
+                Height="40" 
+                Width="100" >
+            <ContentPresenter VerticalAlignment="Center"
+                              HorizontalAlignment="Center"/>
+        </Border>
+    </ControlTemplate>
+
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.ColumnSpan" Value="2" />
+        <Setter Property="Grid.Row" Value="3" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="10" />
+
+    </Style>
+
 </ResourceDictionary>

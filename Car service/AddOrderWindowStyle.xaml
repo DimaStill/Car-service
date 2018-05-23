@@ -7,19 +7,26 @@
 
     <Style x:Key="WindowStyle" TargetType="Window" BasedOn="{StaticResource WindowStyle}" />
 
-    <Style x:Key="ContentPresenterStyle" TargetType="ContentPresenter">
-        <Setter Property="TextBlock.Foreground" Value="White"/>
-        <Setter Property="TextBlock.FontWeight" Value="Bold" />
-        <Setter Property="TextBlock.FontSize" Value="20" />
+    <Style x:Key="GroupBoxStyle" TargetType="GroupBox">
+        <Setter Property="Foreground" Value="#FFFFFBE0"/>
     </Style>
 
-    <Style x:Key="IconImageStyle" TargetType="Image">
-        <Setter Property="Width" Value="25" />
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="#FF393E46" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Width"  Value="100" />
         <Setter Property="Height" Value="25" />
-        <Setter Property="Margin" Value="10 0" />
+        <Setter Property="Foreground" Value="#FFFFFBE0" />
     </Style>
-    
-    
+
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="Content" Value="Код співробітника" />
+        <Setter Property="Foreground" Value="#FFFFFBE0" />
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Margin" Value="15 0" />
+    </Style>
 
     <ControlTemplate TargetType="TabItem" x:Key="TabItemTemplate">
 
@@ -36,36 +43,6 @@
                                   TextBlock.FontWeight="Bold"
                                   TextBlock.FontSize="20"
                                   />
-            </Border>
-        </Grid>
-
-    </ControlTemplate>
-
-    
-    <ControlTemplate TargetType="TabItem" x:Key="PhotoTabItemTemplate">
-
-        <Grid Background="#FF3E4959"
-              >
-
-            <Border BorderThickness="0" 
-                    CornerRadius="0,0,0,0">
-                <Grid>
-                    <ContentPresenter Name="FirstNameContent"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"
-                                      ContentSource="Header"
-                                      TextBlock.Foreground="White"
-                                      TextBlock.FontWeight="Bold"
-                                      TextBlock.FontSize="20"
-                                      Margin="40"/>
-                    <Ellipse Height="100" 
-                             Width="100" 
-                             HorizontalAlignment="Right">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/Karaev. D.jpg"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Grid>
             </Border>
         </Grid>
 
@@ -97,7 +74,7 @@
                     </StackPanel>
                 </Border>
             </Grid>
-            
+
             <ContentPresenter Name="ContentTabControl"
                               Grid.Row="1"
                               Margin="4"
@@ -105,9 +82,4 @@
         </Grid>
 
     </ControlTemplate>
-
-    <ControlTemplate TargetType="{x:Type Image}" x:Key="ImageTemplate">
-        
-    </ControlTemplate>
-    
 </ResourceDictionary>
