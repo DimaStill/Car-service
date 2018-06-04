@@ -20,6 +20,10 @@
         </Border>
     </ControlTemplate>
 
+  
+    
+    
+
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="Template" Value="{StaticResource ButtonTemplate}" />
         <Setter Property="Grid.Column" Value="0" />

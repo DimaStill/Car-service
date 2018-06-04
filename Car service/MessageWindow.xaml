@@ -1,0 +1,42 @@
+﻿<Window x:Class="Car_service.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Car_service"
+        mc:Ignorable="d"
+        Style="{DynamicResource WindowStyle}"
+        Title="MessageWindow" Height="200" Width="250">
+    <Window.Resources>
+        <ResourceDictionary Source="WindowStyle.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Image Name="typeMessageImage"
+               Grid.Column="0"
+               Grid.Row="0"
+               Width="50"
+               Height="50"/>
+        <TextBlock Name="textMessage"
+                   Grid.Column="1"
+                   Grid.Row="0"
+                   MaxWidth="150"
+                   TextWrapping="Wrap"
+                   MaxHeight="50"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Foreground="White"/>
+        <Button Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Template="{DynamicResource ButtonTemplate}"
+                Content="ОК"
+                Click="OnOK"/>
+    </Grid>
+</Window>

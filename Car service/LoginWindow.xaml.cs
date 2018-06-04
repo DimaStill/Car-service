@@ -64,7 +64,7 @@ namespace Car_service
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message, "Помилка!");
+                new MessageWindow(exception.Message, "Error").Show();
             }
         }
     }

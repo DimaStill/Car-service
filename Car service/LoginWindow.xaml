@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Car_service"
         mc:Ignorable="d"
         Title="Авторизація"
-        Style="{DynamicResource LoginWindowStyle}">
+        Style="{DynamicResource LoginWindowStyle}"
+        Background="#FF222831">
     <Window.Resources>
         <ResourceDictionary Source="LoginStyle.xaml" />
     </Window.Resources>
@@ -16,16 +17,26 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*"/>
             <RowDefinition Height="40*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
-        
-        <Label Style="{DynamicResource LabelStyle}"/>
+
+        <Image Source="pack://application:,,,/Resources/autoservice_Icon.png"
+               Width="65"
+               Height="65"
+               Grid.ColumnSpan="2"
+               Margin="10"/>
+        <StackPanel Grid.Row="1"
+                    Grid.ColumnSpan="2">
+        <TextBlock Style="{DynamicResource LabelStyle}"
+               />
 
         <TextBox Name="TextBoxID"
                  Style="{DynamicResource TextBoxStyle}" 
-                 PreviewKeyDown="LoginPreviewKeyDown"/>
-
+                 PreviewKeyDown="LoginPreviewKeyDown"
+                 />
+        </StackPanel>
 
         <Button Style="{DynamicResource ButtonStyle}" 
                 Click="OnLoginClick"

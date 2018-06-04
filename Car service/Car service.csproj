@@ -59,6 +59,9 @@
     <Compile Include="AddOrderWindow.xaml.cs">
       <DependentUpon>AddOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Page Include="AddOrderWindow.xaml">
       <SubType>Designer</SubType>
@@ -89,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +187,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\UAH_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\autoservice_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\excel_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\error_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\warning_Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

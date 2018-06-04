@@ -26,7 +26,7 @@
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
                         <ToolBar>
-                            <Button>
+                            <Button Click="OnRefreshClick">
                                 <Image Source="pack://application:,,,/Resources/Update_Icon.png"
                                        Style="{StaticResource IconImageStyle}"/>
                             </Button>
@@ -40,6 +40,10 @@
                             </Button>
                             <Button>
                                 <Image Source="pack://application:,,,/Resources/Printer_Icon.png"
+                                       Style="{StaticResource IconImageStyle}"/>
+                            </Button>
+                            <Button>
+                                <Image Source="pack://application:,,,/Resources/excel_Icon.png"
                                        Style="{StaticResource IconImageStyle}"/>
                             </Button>
                             <Separator />
@@ -90,12 +94,12 @@
                     <DataGrid AutoGenerateColumns="True" 
                               x:Name="clientsGrid"
                               Grid.Row="1">
-
+                        
                     </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Name="TabPage3" 
-                     Header="Запчастини" 
+                     Header="Автомобілі" 
                      Template="{StaticResource TabItemTemplate}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -127,7 +131,7 @@
                         </ToolBar>
                     </ToolBarTray>
                     <DataGrid AutoGenerateColumns="True" 
-                              x:Name="storageGrid"
+                              x:Name="carGrid"
                               Grid.Row="1">
 
                     </DataGrid>

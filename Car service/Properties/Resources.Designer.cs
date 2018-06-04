@@ -93,6 +93,16 @@ namespace Car_service.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap autoservice_Icon {
+            get {
+                object obj = ResourceManager.GetObject("autoservice_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap buses {
             get {
                 object obj = ResourceManager.GetObject("buses", resourceCulture);
@@ -126,6 +136,26 @@ namespace Car_service.Properties {
         internal static System.Drawing.Bitmap delivery_truck_2 {
             get {
                 object obj = ResourceManager.GetObject("delivery_truck_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap error_Icon {
+            get {
+                object obj = ResourceManager.GetObject("error_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap excel_Icon {
+            get {
+                object obj = ResourceManager.GetObject("excel_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -226,6 +256,16 @@ namespace Car_service.Properties {
         internal static System.Drawing.Bitmap update_Icon {
             get {
                 object obj = ResourceManager.GetObject("update_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning_Icon {
+            get {
+                object obj = ResourceManager.GetObject("warning_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

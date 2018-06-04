@@ -24,7 +24,7 @@ namespace Car_service
     {
         string connectionString;
         SqlDataAdapter adapter;
-        DataTable ordersTable;
+        DataTable tableOrders, tableCars, tableClients;
 
         public MainWindow()
         {
@@ -57,19 +57,50 @@ namespace Car_service
             }
         }
 
+        private void OnRefreshClick(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sqlCommand = "SELECT * FROM [Замовлення]";
+                SqlCommand command = new SqlCommand(sqlCommand, connection);
+                adapter = new SqlDataAdapter(command);
+                connection.Open();
+
+                ordersGrid.ItemsSource = null;
+                adapter.Fill(tableOrders);
+                ordersGrid.ItemsSource = tableOrders.DefaultView;
+            }
+        }
+
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            string sqlCommand = "SELECT * FROM [Замовлення]";
-            ordersTable = new DataTable();
+            
+            tableOrders = new DataTable();
+            tableCars = new DataTable();
+            tableClients = new DataTable();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
+                    string sqlCommand = "SELECT * FROM [Замовлення]";
                     SqlCommand command = new SqlCommand(sqlCommand, connection);
                     adapter = new SqlDataAdapter(command);
                     connection.Open();
-                    adapter.Fill(ordersTable);
-                    ordersGrid.ItemsSource = ordersTable.DefaultView;
+                    adapter.Fill(tableOrders);
+                    ordersGrid.ItemsSource = tableOrders.DefaultView;
+
+                    sqlCommand = "SELECT * FROM [Клієнти]";
+                    command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    adapter.Fill(tableClients);
+                    clientsGrid.ItemsSource = tableClients.DefaultView;
+
+                    sqlCommand = "SELECT * FROM [Автомобілі]";
+                    command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    adapter.Fill(tableCars);
+                    carGrid.ItemsSource = tableCars.DefaultView;
+
                 }
                 catch (Exception exception)
                 {
