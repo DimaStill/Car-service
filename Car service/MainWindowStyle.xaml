@@ -62,7 +62,7 @@
                              Width="100" 
                              HorizontalAlignment="Right">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/Karaev. D.jpg"/>
+                            <ImageBrush ImageSource="pack://application:,,,/Resources/IncognitoPhoto.png"/>
                         </Ellipse.Fill>
                     </Ellipse>
                 </Grid>

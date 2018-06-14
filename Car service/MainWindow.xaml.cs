@@ -22,12 +22,16 @@ namespace Car_service
         SqlDataAdapter adapter;
         DataTable tableOrders, tableCars, tableClients;
         DataSet ds = new DataSet();
+        DataSet dsClient = new DataSet();
+        DataSet dsCar = new DataSet();
 
         public MainWindow()
         {
             InitializeComponent();
 
             ordersGrid.DataContext = ds.Tables[0];
+            clientsGrid.DataContext = dsClient.Tables[0];
+            carGrid.DataContext = dsCar.Tables[0];
         }
 
         public MainWindow(User currentUser)
@@ -69,9 +73,20 @@ namespace Car_service
                     ds.Clear();
                     adapter.Fill(ds);
                     ordersGrid.ItemsSource = ds.Tables[0].DefaultView;
-                    /*adapter.Fill(tableOrders);
-                    ordersGrid.ItemsSource = tableOrders.DefaultView;*/
 
+                    sqlCommand = "SELECT * FROM [Клієнти]";
+                    command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    dsClient.Clear();
+                    adapter.Fill(dsClient);
+                    clientsGrid.ItemsSource = dsClient.Tables[0].DefaultView;
+
+                    sqlCommand = "SELECT * FROM [Автомобілі]";
+                    command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    dsCar.Clear();
+                    adapter.Fill(dsCar);
+                    carGrid.ItemsSource = dsCar.Tables[0].DefaultView;
                 }
                 catch (Exception exception)
                 {
@@ -86,8 +101,23 @@ namespace Car_service
             {
                 try
                 {
-                    DataRowView row = (DataRowView)ordersGrid.SelectedItems[0];
-                    string sqlCommand = "DELETE FROM [Замовлення] WHERE [Id] = " + row["Id"];
+                    string sqlCommand;
+                    DataRowView row;
+                    if (TabPage1.IsSelected)
+                    {
+                        row = (DataRowView)ordersGrid.SelectedItems[0];
+                        sqlCommand = "DELETE FROM [Замовлення] WHERE [Id] = " + row["Id"];
+                    }
+                    else if (TabPage2.IsSelected)
+                    {
+                        row = (DataRowView)clientsGrid.SelectedItems[0];
+                        sqlCommand = "DELETE FROM [Клієнти] WHERE [Id] = " + row["Id"];
+                    }
+                    else
+                    {
+                        row = (DataRowView)carGrid.SelectedItems[0];
+                        sqlCommand = "DELETE FROM [Автомобілі] WHERE [Id] = " + row["Id"];
+                    }
                     SqlCommand command = new SqlCommand(sqlCommand, connection);
                     adapter = new SqlDataAdapter(command);
                     connection.Open();
@@ -161,7 +191,19 @@ namespace Car_service
 
         private void TextBoxGotFocus(object sender, RoutedEventArgs e)
         {
-            searchTextBox.Text = String.Empty;
+            if (TabPage1.IsSelected)
+            {
+                searchTextBox.Text = String.Empty;
+            }
+            else if (TabPage2.IsSelected)
+            {
+                SearchClientsTextBox.Text = String.Empty;
+            }
+            else
+            {
+                SearchCarsTextBox.Text = String.Empty;
+            }
+            
         }
 
         private void SearchPreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -171,13 +213,38 @@ namespace Car_service
                 {
                     try
                     {
-                        string sqlCommand = "SELECT * FROM [Замовлення] WHERE [" + SearchField.Text + "] LIKE N'" + searchTextBox.Text + "%'";
-                        SqlCommand command = new SqlCommand(sqlCommand, connection);
-                        adapter = new SqlDataAdapter(command);
-                        connection.Open();
-                        ds.Clear();
-                        adapter.Fill(ds);
-                        ordersGrid.ItemsSource = ds.Tables[0].DefaultView;
+                        string sqlCommand;
+                        if (TabPage1.IsSelected)
+                        {
+                            sqlCommand = "SELECT * FROM [Замовлення] WHERE [" + SearchField.Text + "] LIKE N'" + searchTextBox.Text + "%'";
+                            SqlCommand command = new SqlCommand(sqlCommand, connection);
+                            adapter = new SqlDataAdapter(command);
+                            connection.Open();
+                            ds.Clear();
+                            adapter.Fill(ds);
+                            ordersGrid.ItemsSource = ds.Tables[0].DefaultView;
+                        }
+                        else if (TabPage2.IsSelected)
+                        {
+                            sqlCommand = "SELECT * FROM [Клієнти] WHERE [" + SearchFieldClients.Text + "] LIKE N'" + SearchClientsTextBox.Text + "%'";
+                            SqlCommand command = new SqlCommand(sqlCommand, connection);
+                            adapter = new SqlDataAdapter(command);
+                            connection.Open();
+                            dsClient.Clear();
+                            adapter.Fill(dsClient);
+                            ordersGrid.ItemsSource = dsClient.Tables[0].DefaultView;
+                        }
+                        else
+                        {
+                            sqlCommand = "SELECT * FROM [Автомобілі] WHERE [" + SearchFieldCars.Text + "] LIKE N'" + SearchCarsTextBox.Text + "%'";
+                            SqlCommand command = new SqlCommand(sqlCommand, connection);
+                            adapter = new SqlDataAdapter(command);
+                            connection.Open();
+                            dsCar.Clear();
+                            adapter.Fill(dsCar);
+                            ordersGrid.ItemsSource = dsCar.Tables[0].DefaultView;
+                        }
+                        
                     }
                     catch (Exception exception)
                     {
@@ -208,14 +275,14 @@ namespace Car_service
                     sqlCommand = "SELECT * FROM [Клієнти]";
                     command = new SqlCommand(sqlCommand, connection);
                     adapter = new SqlDataAdapter(command);
-                    adapter.Fill(tableClients);
-                    clientsGrid.ItemsSource = tableClients.DefaultView;
+                    adapter.Fill(dsClient);
+                    clientsGrid.ItemsSource = dsClient.Tables[0].DefaultView;
 
                     sqlCommand = "SELECT * FROM [Автомобілі]";
                     command = new SqlCommand(sqlCommand, connection);
                     adapter = new SqlDataAdapter(command);
-                    adapter.Fill(tableCars);
-                    carGrid.ItemsSource = tableCars.DefaultView;
+                    adapter.Fill(dsCar);
+                    carGrid.ItemsSource = dsCar.Tables[0].DefaultView;
 
                 }
                 catch (Exception exception)

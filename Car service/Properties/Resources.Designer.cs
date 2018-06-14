@@ -163,6 +163,26 @@ namespace Car_service.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Incognito {
+            get {
+                object obj = ResourceManager.GetObject("Incognito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IncognitoPhoto {
+            get {
+                object obj = ResourceManager.GetObject("IncognitoPhoto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap juridical_Person_Icon {
             get {
                 object obj = ResourceManager.GetObject("juridical_Person_Icon", resourceCulture);

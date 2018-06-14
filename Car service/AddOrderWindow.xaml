@@ -112,9 +112,7 @@
                 <TextBox Name="yearTextBox"
                          Grid.Column="2"
                          Style="{StaticResource TextBoxStyle}" />
-                <Label Content="Рік випуску"
-                       Style="{StaticResource LabelStyle}"
-                       Grid.Column="3"/>
+                
                 <Label Content="Держ. номер"
                        Style="{StaticResource LabelStyle}"
                        Grid.Row="1"

@@ -23,6 +23,10 @@ namespace Car_service
     {
         string connectionString;
 
+        Random random = new Random();
+
+        string[] typeCar = { "Легковий", "Електромобіль", "Мотоцикл", "Мікроавтобус", "Автобус", "Вантажний", "Фура" };
+
         public AddOrderWindow()
         {
             InitializeComponent();
@@ -99,16 +103,35 @@ namespace Car_service
                 sum += 500;
             }
             sqlExpression += "', " + sum + ")";
+            string person = (bool)physicalRadioButton.IsChecked ? "Фізична" : "Юридична";
+            string sqlExpressionClient = "\nINSERT INTO[dbo].[Клієнти]([ПІБ], [Тип особи], [Автомобіль], [Державний номер]) " +
+                "VALUES(N'" + surnameTextBox.Text + " " + nameTextBox.Text + " " + middleNameTextBox.Text + "', N'" + person +
+                "', N'" + modelTextBox.Text + " " + variantTextBox.Text + "', N'" + govNumber.Text + "')";
+
+            string sqlExpressionAuto = "\nINSERT INTO[dbo].[Автомобілі]([Марка], [Модель], [Тип], [Рік випуску], [Державний номер], " +
+                "[VIN]) VALUES(N'" + modelTextBox.Text + "', N'" + variantTextBox.Text + "', N'" + typeCar[typeVehicleComboBox.SelectedIndex] +
+                "', N'" + yearTextBox.Text + "', N'" + govNumber.Text + "', N'" + VINTextBox.Text + "')";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 int amountAdd = command.ExecuteNonQuery();
+                if (amountAdd == 0)
+                    new MessageWindow("Не вдалося додати", "Error").Show();
+
+                command = new SqlCommand(sqlExpressionClient, connection);
+                amountAdd = command.ExecuteNonQuery();
+                if (amountAdd == 0)
+                    new MessageWindow("Не вдалося додати", "Error").Show();
+
+                command = new SqlCommand(sqlExpressionAuto, connection);
+                amountAdd = command.ExecuteNonQuery();
+                if (amountAdd == 0)
+                    new MessageWindow("Не вдалося додати", "Error").Show();
+
                 if (amountAdd > 0)
                     new MessageWindow("Додавання успішно виконано", "Warning").Show();
-                else
-                    new MessageWindow("Не вдалося додати", "Error").Show();
                 connection.Close();
             }
         }

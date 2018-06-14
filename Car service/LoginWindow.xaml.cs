@@ -70,7 +70,7 @@ namespace Car_service
 
         private void OnRegisterMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            new RegisterWindow().Show();
         }
     }
 }

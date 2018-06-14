@@ -26,12 +26,12 @@
                Height="65"
                Margin="10"/>
         <StackPanel Grid.Row="1">
-        <TextBlock Style="{DynamicResource LabelStyle}"/>
+        <Label Style="{DynamicResource LabelStyle}"/>
 
         <TextBox Name="TextBoxID"
                  Style="{DynamicResource TextBoxStyle}" 
                  PreviewKeyDown="LoginPreviewKeyDown"
-                 />
+                 Margin="5"/>
         </StackPanel>
 
         <Button Style="{DynamicResource ButtonStyle}" 
