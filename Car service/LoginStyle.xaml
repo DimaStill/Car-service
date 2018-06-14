@@ -13,8 +13,8 @@
         <Setter Property="ResizeMode" Value="NoResize" />
     </Style>
     
-    <Style x:Key="LabelStyle" TargetType="TextBlock">
-        <Setter Property="Text" Value="Код співробітника" />
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="Content" Value="Код співробітника" />
         <Setter Property="Foreground" Value="#FFFFFBE0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Margin" Value="5 0" />

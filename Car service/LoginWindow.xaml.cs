@@ -67,5 +67,10 @@ namespace Car_service
                 new MessageWindow(exception.Message, "Error").Show();
             }
         }
+
+        private void OnRegisterMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

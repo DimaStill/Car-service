@@ -32,10 +32,11 @@ namespace Car_service
 
         private void OnAddClick(object sender, RoutedEventArgs e)
         {
+            string date = DateTime.Now.ToString("yyyy-MM-dd");
             string sqlExpression = "INSERT INTO [dbo].[Замовлення] " +
                 "([Марка], [Модель], [Державний номер], [VIN], [Дата], [Статус], [Механік], [Власник], [Роботи], [Вартість]) " +
                 "VALUES (N'" + modelTextBox.Text + "', N'" + variantTextBox.Text + "', N'" + govNumber.Text + "', N'" + 
-                VINTextBox.Text + "', N'" + DateTime.Now + "', N'Не виконано', N'Вірскій Олексій Генадійович', N'" + 
+                VINTextBox.Text + "', N'" + date + "', N'Не виконано', N'Вірскій Олексій Генадійович', N'" + 
                 surnameTextBox.Text + " " + nameTextBox.Text + " " + middleNameTextBox.Text;
             int sum = 0;
             if ((bool)CheckBox1.IsChecked)

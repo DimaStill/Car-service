@@ -34,11 +34,11 @@
                                 <Image Source="pack://application:,,,/Resources/add_Icon.png"
                                        Style="{StaticResource IconImageStyle}"/>
                             </Button>
-                            <Button>
+                            <Button Click="OnDeleteClick">
                                 <Image Source="pack://application:,,,/Resources/delete_Icon.png"
                                        Style="{StaticResource IconImageStyle}"/>
                             </Button>
-                            <Button>
+                            <Button Click="OnPrintClick">
                                 <Image Source="pack://application:,,,/Resources/Printer_Icon.png"
                                        Style="{StaticResource IconImageStyle}"/>
                             </Button>
@@ -47,9 +47,45 @@
                                        Style="{StaticResource IconImageStyle}"/>
                             </Button>
                             <Separator />
-                            <TextBox Width="150"
+                            <TextBox GotFocus="TextBoxGotFocus"
+                                     PreviewKeyDown="SearchPreviewKeyDown"
+                                     Name="searchTextBox"
+                                     Width="150"
                                      Foreground="LightGray">Пошук...
                             </TextBox>
+                            <ComboBox Name="SearchField">
+                                <ComboBoxItem Width="100">
+                                    <TextBlock Text="Id"/>
+                                </ComboBoxItem>
+                                <TextBlock Text="Марка"/>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Модель" />
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Державний номер"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="VIN"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Дата"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Статус"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Механік"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Власник"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Роботи"/>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock Text="Вартість"/>
+                                </ComboBoxItem>
+                            </ComboBox>
                         </ToolBar>
                     </ToolBarTray>
                     <DataGrid AutoGenerateColumns="True" 

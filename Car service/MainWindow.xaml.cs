@@ -8,12 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Car_service
 {
@@ -25,10 +21,13 @@ namespace Car_service
         string connectionString;
         SqlDataAdapter adapter;
         DataTable tableOrders, tableCars, tableClients;
+        DataSet ds = new DataSet();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            ordersGrid.DataContext = ds.Tables[0];
         }
 
         public MainWindow(User currentUser)
@@ -61,15 +60,130 @@ namespace Car_service
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sqlCommand = "SELECT * FROM [Замовлення]";
-                SqlCommand command = new SqlCommand(sqlCommand, connection);
-                adapter = new SqlDataAdapter(command);
-                connection.Open();
+                try
+                {
+                    string sqlCommand = "SELECT * FROM [Замовлення]";
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    ds.Clear();
+                    adapter.Fill(ds);
+                    ordersGrid.ItemsSource = ds.Tables[0].DefaultView;
+                    /*adapter.Fill(tableOrders);
+                    ordersGrid.ItemsSource = tableOrders.DefaultView;*/
 
-                ordersGrid.ItemsSource = null;
-                adapter.Fill(tableOrders);
-                ordersGrid.ItemsSource = tableOrders.DefaultView;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Помилка!");
+                }
             }
+        }
+
+        private void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    DataRowView row = (DataRowView)ordersGrid.SelectedItems[0];
+                    string sqlCommand = "DELETE FROM [Замовлення] WHERE [Id] = " + row["Id"];
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+                    adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    int amountAdd = command.ExecuteNonQuery();
+                    if (amountAdd > 0)
+                        new MessageWindow("Видалення успішно виконано", "Warning").Show();
+                    else
+                        new MessageWindow("Не вдалося видалити", "Error").Show();
+                    connection.Close();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Помилка!");
+                }
+            }
+        }
+
+        private void OnPrintClick(object sender, RoutedEventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    DataRowView row = (DataRowView)ordersGrid.SelectedItems[0];
+                    string sqlCommand = "SELECT * FROM [Замовлення] WHERE [Id] = " + row["Id"];
+                    SqlCommand command = new SqlCommand(sqlCommand, connection);
+                    SqlDataReader sqlDataReader = command.ExecuteReader();
+
+                    Word.Document doc = null;
+                    Word.Application app = new Word.Application();
+                    string source = Environment.CurrentDirectory + "\\Example.docx";
+                    doc = app.Documents.Open(source);
+                    doc.Activate();
+
+                    Word.Bookmarks wBookmarks = doc.Bookmarks;
+                    Word.Range wRange;
+                    sqlDataReader.Read();
+                    wRange = wBookmarks[1].Range;
+                    wRange.Text = sqlDataReader.GetValue(1).ToString() + sqlDataReader.GetValue(2).ToString();
+                    wRange = wBookmarks[2].Range;
+                    wRange.Text = sqlDataReader.GetValue(5).ToString().Split(' ')[0];
+                    wRange = wBookmarks[3].Range;
+                    wRange.Text = sqlDataReader.GetValue(8).ToString();
+                    wRange = wBookmarks[4].Range;
+                    wRange.Text = sqlDataReader.GetValue(3).ToString();
+                    wRange = wBookmarks[5].Range;
+                    wRange.Text = sqlDataReader.GetValue(0).ToString();
+                    wRange = wBookmarks[6].Range;
+                    wRange.Text = sqlDataReader.GetValue(10).ToString();
+                    wRange = wBookmarks[7].Range;
+                    wRange.Text = sqlDataReader.GetValue(9).ToString();
+
+                    PrintDialog printDialog = new PrintDialog();
+                    if (printDialog.ShowDialog() == true)
+                    {
+                        printDialog.PrintDocument(((IDocumentPaginatorSource)doc).DocumentPaginator, "Document");
+                    }
+                    doc.Close();
+
+                    doc = null;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Помилка!");
+                }
+            }
+            
+           
+        }
+
+        private void TextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            searchTextBox.Text = String.Empty;
+        }
+
+        private void SearchPreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (searchTextBox.Text != String.Empty)
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        string sqlCommand = "SELECT * FROM [Замовлення] WHERE [" + SearchField.Text + "] LIKE N'" + searchTextBox.Text + "%'";
+                        SqlCommand command = new SqlCommand(sqlCommand, connection);
+                        adapter = new SqlDataAdapter(command);
+                        connection.Open();
+                        ds.Clear();
+                        adapter.Fill(ds);
+                        ordersGrid.ItemsSource = ds.Tables[0].DefaultView;
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show(exception.Message, "Помилка!");
+                    }
+                }
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
@@ -86,8 +200,10 @@ namespace Car_service
                     SqlCommand command = new SqlCommand(sqlCommand, connection);
                     adapter = new SqlDataAdapter(command);
                     connection.Open();
-                    adapter.Fill(tableOrders);
-                    ordersGrid.ItemsSource = tableOrders.DefaultView;
+                    adapter.Fill(ds);
+                    ordersGrid.ItemsSource = ds.Tables[0].DefaultView;
+                    /*adapter.Fill(tableOrders);
+                    ordersGrid.ItemsSource = tableOrders.DefaultView;*/
 
                     sqlCommand = "SELECT * FROM [Клієнти]";
                     command = new SqlCommand(sqlCommand, connection);
