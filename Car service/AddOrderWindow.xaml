@@ -51,33 +51,22 @@
                 <TextBox Name="middleNameTextBox"
                          Grid.Column="2"
                          Style="{StaticResource TextBoxStyle}" />
-                <StackPanel Orientation="Horizontal" 
-                            Grid.Row="1"
-                            Grid.ColumnSpan="3"
-                            HorizontalAlignment="Center">
-                    <RadioButton Name="physicalRadioButton"
-                                 Margin="15 0">
-                        <StackPanel>
-                            <Image Source="pack://application:,,,/Resources/physical_Person_Icon.png"
-                               Width="50"
-                               Height="50"/>
-                            <TextBlock Text="Фізична особа"
-                                       Foreground="White"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Name="juridicalRadioButton"
-                                 Grid.Row="1"
-                                 Grid.Column="1"
-                                 Margin="15 0">
-                        <StackPanel>
-                            <Image Source="pack://application:,,,/Resources/juridical_Person_Icon.png"
-                                   Width="50"
-                                   Height="50"/>
-                            <TextBlock Text="Юридична особа"
-                                       Foreground="White"/>
-                        </StackPanel>
-                    </RadioButton>
-                </StackPanel>
+                <Label Content="Телефон"
+                       Style="{StaticResource LabelStyle}"
+                       Grid.Column="0"
+                       Grid.Row="1"/>
+                <TextBox Name="phoneTextBox"
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Style="{StaticResource TextBoxStyle}" />
+                <Label Content="Email"
+                       Style="{StaticResource LabelStyle}"
+                       Grid.Column="1"
+                       Grid.Row="1"/>
+                <TextBox Name="emailTextBox"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         Style="{StaticResource TextBoxStyle}" />
             </Grid>
         </GroupBox>
 
@@ -117,7 +106,7 @@
                        Style="{StaticResource LabelStyle}"
                        Grid.Row="1"
                        Grid.Column="0"/>
-                <TextBox Name="govNumber"
+                <TextBox Name="registrationPlate"
                          Grid.Row="1"
                          Grid.Column="0"
                          Style="{StaticResource TextBoxStyle}" />
@@ -338,7 +327,8 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <RadioButton Content="Плановий огляд"
+                        <RadioButton Name="Plan"
+                                    Content="Плановий огляд"
                                      Foreground="White"
                                      Grid.Column="0"
                                      HorizontalAlignment="Right"
@@ -369,7 +359,8 @@
                             <TextBlock Text="30 хв." 
                                        Foreground="White"
                                        Margin="10 0"/>
-                            <TextBlock Text="100 UAH" 
+                            <TextBlock Name="Money"
+                                       Text="100 UAH" 
                                        Foreground="White" 
                                        Margin="5 0"/>
                         </StackPanel>

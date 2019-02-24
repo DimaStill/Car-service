@@ -42,34 +42,7 @@
     </ControlTemplate>
 
     
-    <ControlTemplate TargetType="TabItem" x:Key="PhotoTabItemTemplate">
-
-        <Grid Background="#FF3E4959"
-              >
-
-            <Border BorderThickness="0" 
-                    CornerRadius="0,0,0,0">
-                <Grid>
-                    <ContentPresenter Name="FirstNameContent"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"
-                                      ContentSource="Header"
-                                      TextBlock.Foreground="White"
-                                      TextBlock.FontWeight="Bold"
-                                      TextBlock.FontSize="20"
-                                      Margin="40"/>
-                    <Ellipse Height="100" 
-                             Width="100" 
-                             HorizontalAlignment="Right">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/Resources/IncognitoPhoto.png"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Grid>
-            </Border>
-        </Grid>
-
-    </ControlTemplate>
+    
 
 
     <ControlTemplate TargetType="{x:Type TabControl}" x:Key="TabControlItem">

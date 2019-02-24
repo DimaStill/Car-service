@@ -11,11 +11,13 @@
         Loaded="WindowLoaded">
     <Window.Resources>
         <ResourceDictionary Source="MainWindowStyle.xaml" />
+
     </Window.Resources>
 
     <Grid>
         
-        <TabControl Template="{StaticResource TabControlItem}">
+        <TabControl Template="{StaticResource TabControlItem}"
+                    Name="tabControl1">
             <TabItem Name="TabPage1" 
                      Header="Замовлення" 
                      Template="{StaticResource TabItemTemplate}">
@@ -52,44 +54,18 @@
                                      Foreground="LightGray">Пошук...
                             </TextBox>
                             <ComboBox Name="SearchField">
-                                <ComboBoxItem Width="100">
-                                    <TextBlock Text="Id"/>
-                                </ComboBoxItem>
-                                <TextBlock Text="Марка"/>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Модель" />
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Державний номер"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="VIN"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Дата"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Статус"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Механік"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Власник"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Роботи"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Вартість"/>
-                                </ComboBoxItem>
                             </ComboBox>
                         </ToolBar>
                     </ToolBarTray>
-                    <DataGrid AutoGenerateColumns="True" 
-                              x:Name="ordersGrid"
+                    <DataGrid x:Name="ordersGrid"
                               Grid.Row="1">
-                    
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Змінити статус"
+                                          Click="MenuChangeStatusClick"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        
                     </DataGrid>
                 </Grid>
             </TabItem>
@@ -127,28 +103,25 @@
                                      PreviewKeyDown="SearchPreviewKeyDown">Пошук...
                             </TextBox>
                             <ComboBox Name="SearchFieldClients">
-                                <ComboBoxItem Width="100">
-                                    <TextBlock Text="Id"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="ПІБ" />
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Тип особи"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Автомобіль"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Державний номер"/>
-                                </ComboBoxItem>
                             </ComboBox>
                         </ToolBar>
                     </ToolBarTray>
-                    <DataGrid AutoGenerateColumns="True" 
-                              x:Name="clientsGrid"
-                              Grid.Row="1">
-                        
+                    <DataGrid x:Name="clientsGrid"
+                              Grid.Row="1" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" 
+                                                Header="Код клієнта"/>
+                            <DataGridTextColumn Binding="{Binding Name}" 
+                                                Header="Ім’я" />
+                            <DataGridTextColumn Binding="{Binding Surname}" 
+                                                Header="Пріщвише"/>
+                            <DataGridTextColumn Binding="{Binding MiddleName}" 
+                                                Header="По-батькові"/>
+                            <DataGridTextColumn Binding="{Binding PhoneNumber}" 
+                                                Header="Номер телефону"/>
+                            <DataGridTextColumn Binding="{Binding Email}" 
+                                                Header="Email"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
@@ -186,39 +159,63 @@
                                      PreviewKeyDown="SearchPreviewKeyDown">Пошук...
                             </TextBox>
                             <ComboBox Name="SearchFieldCars">
-                                <ComboBoxItem Width="100">
-                                    <TextBlock Text="Id"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Марка" />
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Модель"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Тип"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Рік випуску"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="Державний номер"/>
-                                </ComboBoxItem>
-                                <ComboBoxItem>
-                                    <TextBlock Text="VIN"/>
-                                </ComboBoxItem>
                             </ComboBox>
                         </ToolBar>
                     </ToolBarTray>
-                    <DataGrid AutoGenerateColumns="True" 
+                    <DataGrid AutoGenerateColumns="False" 
                               x:Name="carGrid"
                               Grid.Row="1">
-
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" 
+                                                Header="Код автомобіля"/>
+                            <DataGridTextColumn Binding="{Binding Model}" 
+                                                Header="Марка" />
+                            <DataGridTextColumn Binding="{Binding Variant}" 
+                                                Header="Модель"/>
+                            <DataGridTextColumn Binding="{Binding Type}" 
+                                                Header="Тип"/>
+                            <DataGridTextColumn Binding="{Binding Year}" 
+                                                Header="Рік випуску"/>
+                            <DataGridTextColumn Binding="{Binding RegistrationPlate}" 
+                                                Header="Держ. номер"/>
+                            <DataGridTextColumn Binding="{Binding VIN}" 
+                                                Header="VIN"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabPage4"  
-                     Template="{StaticResource PhotoTabItemTemplate}">
+            <TabItem Name="TabPage4">
+                <TabItem.Template>
+                    <ControlTemplate TargetType="TabItem">
+
+                        <Grid Background="#FF3E4959"
+              >
+
+                            <Border BorderThickness="0" 
+                    CornerRadius="0,0,0,0">
+                                <Grid>
+                                    <ContentPresenter Name="FirstNameContent"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      ContentSource="Header"
+                                      TextBlock.Foreground="White"
+                                      TextBlock.FontWeight="Bold"
+                                      TextBlock.FontSize="20"
+                                      Margin="40"/>
+                                    <Ellipse Height="100" 
+                             Width="100" 
+                             HorizontalAlignment="Right"
+                                             Name="PhotoImage">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="pack://application:,,,/Resources/IncognitoPhoto.png"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                    </ControlTemplate>
+                </TabItem.Template>
                 <TabItem.Header>
                     <Grid>
                         <Grid.RowDefinitions>

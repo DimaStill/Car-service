@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,42 +23,57 @@ namespace Car_service
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        string connectionString;
-
         public RegisterWindow()
         {
             InitializeComponent();
-
-            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
         private void LoadImage(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog myDialog = new OpenFileDialog();
+            /*OpenFileDialog myDialog = new OpenFileDialog();
             myDialog.Filter = "Картинки(*.JPG;*.PNG)|*.JPG;*.PNG" + "|Все файлы (*.*)|*.* ";
             myDialog.CheckFileExists = true;
             myDialog.Multiselect = true;
             if (myDialog.ShowDialog() == true)
             {
+                string id = "select top 1 * from [dbo].[Працівники] order by Id desc";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    
+                    SqlCommand commandId = new SqlCommand(id, connection);
+                    using (SqlDataReader reader = commandId.ExecuteReader())
+                    {
+                        reader.Read();
+                        id = reader.GetValue(0).ToString();
+                    }
+                    connection.Close();
+                }
                 FileNameTextBlock.Text = myDialog.FileName;
-            }
+                string format = myDialog.FileName.Split('.')[1];
+                File.Copy(myDialog.FileName, "Resources/" + id + "." + format);
+                System.Windows.Resources.StreamResourceInfo res =
+                    Application.GetResourceStream(new Uri("images/river.jpg", UriKind.Relative));
+            }*/
         }
 
         private void OnRegisterClick(object sender, RoutedEventArgs e)
         {
-            string sqlExpression = "INSERT INTO [dbo].[Працівники] ([Ім’я], [Прізвище], [По батькові], [Посада]) VALUES " +
-                "(N'" + NameTextBox.Text + "', N'" + SurnameTextBox.Text  + "', N'" + MiddleNameTextBox.Text + "', N'" + PositionTextBox.Text + "')";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            User newUser = new User
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, connection);
-                int amountAdd = command.ExecuteNonQuery();
-                if (amountAdd > 0)
-                    new MessageWindow("Додавання успішно виконано", "Warning").Show();
-                else
-                    new MessageWindow("Не вдалося додати", "Error").Show();
-                connection.Close();
+                Name = NameTextBox.Text,
+                Surname = SurnameTextBox.Text,
+                MiddleName = MiddleNameTextBox.Text,
+                Position = PositionTextBox.Text
+            };
+
+            using (CarServiceContext db = new CarServiceContext())
+            {
+                db.Users.Add(newUser);
+                db.SaveChanges();
             }
+
+            Close();
         }
     }
 }

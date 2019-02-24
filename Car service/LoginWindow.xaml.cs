@@ -23,13 +23,9 @@ namespace Car_service
     /// </summary>
     public partial class LoginWindow : Window
     {
-        string connectionString;
-
         public LoginWindow()
         {
             InitializeComponent();
-
-            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
         private void LoginPreviewKeyDown(object sender, KeyEventArgs e)
@@ -40,32 +36,20 @@ namespace Car_service
 
         private void OnLoginClick(object sender, RoutedEventArgs e)
         {
-            string sqlCommand = $"SELECT * FROM [Працівники] WHERE [ID] = {TextBoxID.Text}";
-            SqlConnection connection = null;
-            try
+            if (TextBoxID.Text == string.Empty)
+                new MessageWindow("Введіть свій унікальний код", "Error").Show();
+
+            User loginUser;
+            int inputLogin = Convert.ToInt32(TextBoxID.Text);
+            using (CarServiceContext db = new CarServiceContext())
+                loginUser = db.Users.FirstOrDefault(user => user.Id == inputLogin);
+            if (loginUser != null)
             {
-                if (TextBoxID.Text == String.Empty)
-                    throw new Exception("Введіть свій унікальний код");
-                User user = new User();
-                using (connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlCommand, connection);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        reader.Read();
-                        if (!reader.HasRows)
-                            throw new Exception("Робітник з таким кодом не знайдено");
-                        user.ConvertToUser(reader);
-                    }
-                }
-                new MainWindow(user).Show();
+                new MainWindow(loginUser).Show();
                 Close();
             }
-            catch (Exception exception)
-            {
-                new MessageWindow(exception.Message, "Error").Show();
-            }
+            else
+                new MessageWindow("Робітника з таким кодом не знайдено", "Error").Show();
         }
 
         private void OnRegisterMouseDown(object sender, MouseButtonEventArgs e)
